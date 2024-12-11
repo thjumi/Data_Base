@@ -1,125 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aventuras de los Triggers</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom right, #e9f1e6, #fffdf9);
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      color: #505c26;
-      margin: 20px 0;
-      font-size: 2.5rem;
-    }
-    .game-container {
-      margin: 20px auto;
-      width: 90%;
-      max-width: 400px;
-      border: 3px solid #505c26;
-      border-radius: 15px;
-      padding: 20px;
-      background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .scenario-box {
-      font-size: 1.2rem;
-      margin: 20px 0;
-      padding: 15px;
-      border: 2px solid #505c26;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    button {
-      font-size: 1rem;
-      padding: 10px 15px;
-      background-color: #505c26;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s, background-color 0.3s;
-    }
-    button:hover {
-      background-color: #6a7f3e;
-      transform: scale(1.1);
-    }
-    #score {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      color: #505c26;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigger Syntax Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #e3f2fd, #90caf9);
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #0d47a1;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #1565c0;
+        }
+        .question {
+            font-size: 1.5em;
+            margin: 20px 0;
+            color: #0d47a1;
+        }
+        .input-container {
+            margin: 20px 0;
+        }
+        .syntax-input {
+            width: 80%;
+            padding: 12px;
+            font-size: 1em;
+            border: 2px solid #64b5f6;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .submit-btn {
+            padding: 12px 25px;
+            background: linear-gradient(to right, #42a5f5, #1e88e5);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .submit-btn:hover {
+            background: linear-gradient(to right, #1e88e5, #1565c0);
+            transform: scale(1.05);
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .level {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 700px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Aventuras de los Triggers</h1>
-  <div class="game-container">
-    <div class="scenario-box" id="scenarioBox">Preparando el desafío...</div>
-    <div class="buttons">
-      <button onclick="checkAnswer('BEFORE INSERT')">BEFORE INSERT</button>
-      <button onclick="checkAnswer('AFTER UPDATE')">AFTER UPDATE</button>
-      <button onclick="checkAnswer('BEFORE DELETE')">BEFORE DELETE</button>
+    <h1>Trigger Syntax Game</h1>
+    <p class="instructions">Completa la sintaxis SQL para los triggers correctamente y mejora tus habilidades.</p>
+
+    <div id="game">
+        <!-- Nivel 1 -->
+        <div class="level" id="level-1">
+            <div class="question">Completa la sintaxis para crear un trigger que se ejecute <b>antes</b> de insertar un registro:</div>
+            <div class="input-container">
+                <code>CREATE TRIGGER trigger_name </code>
+                <input type="text" id="input-1" class="syntax-input" placeholder="tu código aquí">
+                <code> ON table_name FOR EACH ROW BEGIN ... END;</code>
+            </div>
+            <button class="submit-btn" onclick="checkAnswer(1)">Verificar</button>
+        </div>
+
+        <!-- Nivel 2 -->
+        <div class="level" id="level-2" style="display: none;">
+            <div class="question">Completa la sintaxis para un trigger que registre cambios <b>después</b> de actualizar un registro:</div>
+            <div class="input-container">
+                <code>CREATE TRIGGER trigger_name </code>
+                <input type="text" id="input-2" class="syntax-input" placeholder="tu código aquí">
+                <code> ON table_name FOR EACH ROW BEGIN ... END;</code>
+            </div>
+            <button class="submit-btn" onclick="checkAnswer(2)">Verificar</button>
+        </div>
+
+        <!-- Nivel 3 -->
+        <div class="level" id="level-3" style="display: none;">
+            <div class="question">Completa la sintaxis para un trigger que registre un pedido <b>después</b> de eliminarlo:</div>
+            <div class="input-container">
+                <code>CREATE TRIGGER trigger_name </code>
+                <input type="text" id="input-3" class="syntax-input" placeholder="tu código aquí">
+                <code> ON table_name FOR EACH ROW BEGIN ... END;</code>
+            </div>
+            <button class="submit-btn" onclick="checkAnswer(3)">Verificar</button>
+        </div>
     </div>
-    <div id="score">Puntos: 0</div>
-  </div>
-  <script>
-    let score = 0;
-    const scenarios = [
-      {
-        text: "Antes de añadir un nuevo cliente, quieres validar que el correo electrónico no esté duplicado.",
-        trigger: "BEFORE INSERT"
-      },
-      {
-        text: "Después de actualizar el estado de un pedido, necesitas registrar la fecha y hora del cambio.",
-        trigger: "AFTER UPDATE"
-      },
-      {
-        text: "Antes de eliminar un producto, necesitas verificar que no esté asociado a ningún pedido activo.",
-        trigger: "BEFORE DELETE"
-      },
-      {
-        text: "Antes de agregar una transacción, deseas calcular impuestos automáticamente.",
-        trigger: "BEFORE INSERT"
-      },
-      {
-        text: "Después de modificar el precio de un producto, quieres actualizar los reportes de ventas.",
-        trigger: "AFTER UPDATE"
-      }
-    ];
-    let currentScenario = {};
 
-    // Generar un escenario aleatorio
-    function generateScenario() {
-      const randomIndex = Math.floor(Math.random() * scenarios.length);
-      currentScenario = scenarios[randomIndex];
-      document.getElementById('scenarioBox').textContent = currentScenario.text;
-    }
+    <div id="result"></div>
 
-    // Verificar la respuesta del jugador
-    function checkAnswer(answer) {
-      if (answer === currentScenario.trigger) {
-        score++;
-        document.getElementById('score').textContent = `Puntos: ${score}`;
-        generateScenario(); // Generar un nuevo escenario
-      } else {
-        alert(`¡Incorrecto! El trigger correcto era: ${currentScenario.trigger}.`);
-      }
-    }
+    <script>
+        let currentLevel = 1;
 
-    // Iniciar el juego
-    generateScenario();
-  </script>
+        function checkAnswer(level) {
+            const correctAnswers = {
+                1: "BEFORE INSERT",
+                2: "AFTER UPDATE",
+                3: "AFTER DELETE"
+            };
+
+            const input = document.getElementById(`input-${level}`).value.trim().toUpperCase();
+            const resultDiv = document.getElementById("result");
+
+            if (input === correctAnswers[level]) {
+                resultDiv.textContent = "¡Correcto!";
+                resultDiv.style.color = "green";
+
+                if (level < 3) {
+                    document.getElementById(`level-${level}`).style.display = "none";
+                    document.getElementById(`level-${level + 1}`).style.display = "block";
+                } else {
+                    resultDiv.textContent += " ¡Has completado todos los niveles!";
+                }
+            } else {
+                resultDiv.textContent = "Incorrecto. Inténtalo de nuevo.";
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
 </body>
 </html>
